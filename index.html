@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Element scroll with mouse</title>
+
+  <!-- style -->
+  <style>
+    #object {
+      position: fixed;
+      top: 0;
+      height: 30px;
+      width: 30px;
+      z-index: 999;
+      border-radius: 5px;
+      background: #d3d3d3;
+    }
+
+    .box {
+      height: 1500px;
+      width: 100%;
+      position: relative;
+      z-index: -1;
+      background-color: orangered;
+    }
+
+    body {
+      height: 3000px;
+      background: grey;
+    }
+  </style>
+  <!-- style -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+
+
+<body>
+
+  <!-- markup -->
+  <div id='object'></div>
+  <div class="box"></div>
+  <!--/ markup -->
+
+
+
+  <!-- custom js -->
+  <script>
+    let window_width = $(window).width() - $('#object').width();
+    let window_height = $(window).height() - $('#object').height();
+
+    let document_height = $(document).height() - $('.box').height();
+
+    $(function () {
+      $(window).scroll(function () {
+        let scroll_position = $(window).scrollTop();
+        let object_position_top = window_height * (scroll_position / document_height);
+        $('#object').css({
+          'top': object_position_top
+        });
+      });
+    });
+  </script>
+  <!--/ custom js -->
+
+</body>
+
+</html>
